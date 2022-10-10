@@ -9,7 +9,7 @@ const PizzaCard = () => {
             <h1 className={styles.title}>FIORI DI ZUCCA</h1>
             <span className={styles.price}>$19.90</span>
             <p className={styles.desc}>
-                MSKDFAJKSDJFLKJSADLKFJASDFASDSA
+                MSKDFAJKSDJFLKJSADLKFJASDFA
             </p>
         </div>
     )

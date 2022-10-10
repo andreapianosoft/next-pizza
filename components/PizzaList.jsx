@@ -7,10 +7,7 @@ const PizzaList = () => {
         <div className={styles.container}>
             <h1>THE BEST PIZZA IN TOWN</h1>
             <p className={styles.desc}>
-                KDJGLJDKGJKLDJFLKGJKLDSAJFKsdfafdgdfgfdgdfsgdfgsdLJSADLFJL
-                KDJGLJDKGJKLDJFLKGJKLDSAJFKsdfafdgdfgfdgdfsgdfgsdLJSADLFJL
-                KDJGLJDKGJKLDJFLKGJKLDSAJFKsdfafdgdfgfdgdfsgdfgsdLJSADLFJL
-                KDJGLJDKGJKLDJFLKGJKLDSAJFKsdfafdgdfgfdgdfsgdfgsdLJSADLFJL
+                KDJGLJDKfsgdfgsdLDLFJL
             </p>
             <div className={styles.wrapper}>
                 <PizzaCard />
