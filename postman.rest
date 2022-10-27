@@ -1,0 +1,28 @@
+POST http://localhost:3000/api/products
+content-type: application/json
+
+{
+    "title": "pizza4",
+    "img": "/img/pizza.png",
+    "desc": "desc4",
+    "prices": [
+        12,
+        13,
+        14
+    ],
+    "extraOption": [
+        {
+            "text": "Spicy Sauce",
+            "price": 2
+        },
+          {
+            "text": "Garlic Sauce",
+            "price": 3
+        }
+    ]
+}
+
+
+#################
+GET http://localhost:3000/api/products/634931f23ad1f93b3c57707b
+
