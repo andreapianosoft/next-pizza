@@ -11,11 +11,13 @@ import {
 } from "@paypal/react-paypal-js";
 import axios from 'axios';
 import { reset } from '../redux/cartSlice';
+import OrderDetail from "../components/OrderDetail";
 
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
     const [open, setOpen] = useState(false);
+    const [cash, setCash] = useState(false);
     const amount = cart.total;
     const currency = "EUR";
     const style = {"layout":"vertical"};
@@ -157,7 +159,12 @@ const Cart = () => {
                     </div>
                     {open ? (
                             <div className={styles.paymentMethods}>
-                                <button className={styles.payButton}>CASH ON DELIVERY</button>
+                                <button 
+                                    className={styles.payButton} 
+                                    onClick={() => setCash(true)}
+                                >
+                                    CASH ON DELIVERY
+                                </button>
                                 <PayPalScriptProvider
                                 options={{
                                     "client-id": "ATwKA_jIpqLP6FrikIEn3M9TijgSQ1bk9ig45GHdxHgFJ6fHn2F0kiWmbk2sEZhBesqCuK7o-HDJ16Y3",
@@ -177,6 +184,7 @@ const Cart = () => {
                     )}
                 </div>
             </div>
+            {cash && <OrderDetail total={cart.total} createOrder={createOrder} />}
         </div>
     )
 }
