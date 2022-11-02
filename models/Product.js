@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const ProductSchema = new mongoose.Schema({
+const ProductSchema = new mongoose.Schema(
+    {
     title: {
         type: String,
         required: true,
@@ -14,14 +15,16 @@ const ProductSchema = new mongoose.Schema({
     img: {
         type: String,
         required: true,
-        maxlength: 200,
     },
     prices: {
         type: [Number],
         required: true,
     },
     extraOptions: {
-        type: [{text: { type: String, required: true }, price: { type: Number, required: true }}],
+        type: [{
+            text: { type: String, required: true }, 
+            price: { type: Number, required: true }
+        }],
         required: true,
     },
 },
