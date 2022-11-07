@@ -9,10 +9,13 @@ import {
 } from '@paypal/react-paypal-js';
 import { useRouter } from 'next/router';
 import { reset } from '../redux/cartSlice';
+import axios from 'axios';
+import OrderDetail from '../Components/OrderDetail/OrderDetail';
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
     const [open, setOpen] = useState(false);
+    const [cash, setCash] = useState(false);
     const amount = cart.total;
     const currency = 'USD';
     const style = { layout: 'vertical' };
@@ -21,7 +24,11 @@ const Cart = () => {
 
     const createOrder = async (data) => {
         try {
-            const res = axios.post('http://localhost:3000/api/orders', data);
+            const res = await axios.post(
+                'http://localhost:3000/api/orders',
+                data
+            );
+
             res.status === 201 && router.push('/orders/' + res.data._id);
             dispatch(reset());
         } catch (err) {
@@ -165,7 +172,10 @@ const Cart = () => {
 
                     {open ? (
                         <div className={styles.paymentMethods}>
-                            <button className={styles.payButton}>
+                            <button
+                                className={styles.payButton}
+                                onClick={() => setCash(true)}
+                            >
                                 CASH ON DELIVERY
                             </button>
                             <PayPalScriptProvider
@@ -193,6 +203,9 @@ const Cart = () => {
                     )}
                 </div>
             </div>
+            {cash && (
+                <OrderDetail total={cart.total} createOrder={createOrder} />
+            )}
         </div>
     );
 };
