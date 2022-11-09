@@ -19,17 +19,29 @@ const Add = ({ setClose }) => {
     }
 
     const handleExtraInput = (e) => {
-        setExtra({ ...extra, [e.target.name]: e.target.value })
+        setExtra({ ...extra, [e.target.name]: e.target.value });
     };
 
     const handleExtra = (e) => {
-        setExtraOptions(prev => [ ...prev, extra ]);
+        setExtraOptions((prev) => [ ...prev, extra ]);
     };
        
     const handleCreate = async () => {
-        
+        const data = new FormData();
+        data.append("file", file);
+        data.append("upload_preset", "uploads")
+        try { 
+            const uploadRes = await axios.post(
+                "https://api.cloudinary.com/v1_1/dgttatkzw/image/upload", 
+                data
+            );
+
+            const { url } = uploadRes.data;
+        } catch (err) {
+            console.log(err);
+        }
     }
-    
+
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
