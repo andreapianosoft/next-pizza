@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { set } from 'mongoose';
 import Image from 'next/image';
 import { useState } from 'react';
 import styles from './Admin.module.css';
@@ -10,12 +9,15 @@ const Index = ({ orders, products }) => {
     const status = ['preparing', 'on the way', 'delivered'];
 
     const handleDelete = async (id) => {
+        console.log(id);
         try {
             const res = await axios.delete(
                 'http://localhost:3000/api/products/' + id
             );
             setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
-        } catch (err) {}
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     const handleStatus = async (id) => {
@@ -66,7 +68,7 @@ const Index = ({ orders, products }) => {
                                 </td>
                                 <td>{product._id.slice(0, 5)}...</td>
                                 <td>{product.title}</td>
-                                <td>{product.prices[0]}</td>
+                                <td>${product.prices[0]}</td>
                                 <td>
                                     <button className={styles.button}>
                                         Edit
@@ -128,9 +130,20 @@ const Index = ({ orders, products }) => {
     );
 };
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => {
+    const myCookie = ctx.req?.cookies || '';
+
+    if (myCookie.token !== process.env.TOKEN) {
+        return {
+            redirect: {
+                destination: '/admin/login',
+                permanent: false,
+            },
+        };
+    }
+
     const productRes = await axios.get('http://localhost:3000/api/products');
-    const orderRes = await axios.get('http://localhost:3000/api/products');
+    const orderRes = await axios.get('http://localhost:3000/api/orders');
 
     return {
         props: {
