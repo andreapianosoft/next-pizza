@@ -34,12 +34,15 @@ const Navbar = () => {
                     </Link>
 
                     <li className={styles.listItem}>Menu</li>
-                    <Image
-                        src='/img/logo.png'
-                        alt=''
-                        width='160px'
-                        height='69px'
-                    />
+                    <Link href='/' passHref>
+                        <Image
+                            className={styles.logo}
+                            src='/img/logo.png'
+                            alt=''
+                            width='160px'
+                            height='69px'
+                        />
+                    </Link>
                     <li className={styles.listItem}>Events</li>
                     <li className={styles.listItem}>Blog</li>
                     <li className={styles.listItem}>Contact</li>
